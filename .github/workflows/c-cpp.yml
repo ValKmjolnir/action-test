@@ -2,9 +2,9 @@ name: Test CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
@@ -12,9 +12,13 @@ jobs:
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v4
+    - name: Tag
+      run: |
+        git tag next_macOS
+        git push origin next_macOS
     - name: Build
       run: |
-          echo "building"
+        echo "building"
     - name: Test
       run: echo "testing"
     - name: Package
@@ -32,9 +36,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+    - name: Tag
+      run: |
+        git tag next_linux_x86_64
+        git push origin next_linux_x86_64
     - name: Build
       run: |
-          echo "building"
+        echo "building"
     - name: Test
       run: echo "testing"
     - name: Package
