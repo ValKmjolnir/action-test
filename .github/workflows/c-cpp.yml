@@ -16,7 +16,7 @@ jobs:
       run: |
         git fetch --tags origin
         git tag -f next_macOS
-        git push origin next_macOS
+        git push -f origin next_macOS
     - name: Build
       run: |
         echo "building"
@@ -42,7 +42,7 @@ jobs:
       run: |
         git fetch --tags origin
         git tag -f next_linux_x86_64
-        git push origin next_linux_x86_64
+        git push -f origin next_linux_x86_64
     - name: Build
       run: |
         echo "building"
