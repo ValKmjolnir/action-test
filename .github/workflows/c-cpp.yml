@@ -32,7 +32,7 @@ jobs:
         prerelease: true
         draft: false
         files: |
-          test.tar
+          test.txt
     
   linux-x86_64-build:
     runs-on: ubuntu-latest
