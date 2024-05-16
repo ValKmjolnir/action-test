@@ -30,6 +30,7 @@ jobs:
         name: macOS nightly build
         tag_name: next_macOS
         prerelease: true
+        draft: false
         files: |
           test.tar
     
@@ -55,5 +56,6 @@ jobs:
         name: linux nightly build
         tag_name: next_linux_x86_64
         prerelease: true
+        draft: false
         files: |
           test.txt
