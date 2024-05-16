@@ -14,7 +14,8 @@ jobs:
     - uses: actions/checkout@v4
     - name: Tag
       run: |
-        git tag next_macOS
+        git fetch --tags
+        git merge next_macOS
         git push origin next_macOS
     - name: Build
       run: |
@@ -38,7 +39,8 @@ jobs:
     - uses: actions/checkout@v4
     - name: Tag
       run: |
-        git tag next_linux_x86_64
+        git fetch --tags
+        git merge next_linux_x86_64
         git push origin next_linux_x86_64
     - name: Build
       run: |
