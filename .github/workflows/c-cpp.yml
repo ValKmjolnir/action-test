@@ -15,9 +15,8 @@ jobs:
     - name: Tag
       run: |
         git fetch --tags origin
-        git checkout main
-        git pull
-        git merge next_macOS --allow-unrelated-histories
+        git push --delete next_macOS
+        git tag next_macOS
         git push origin next_macOS
     - name: Build
       run: |
@@ -42,9 +41,8 @@ jobs:
     - name: Tag
       run: |
         git fetch --tags origin
-        git checkout main
-        git pull
-        git merge next_linux_x86_64 --allow-unrelated-histories
+        git push --delete next_linux_x86_64
+        git tag next_linux_x86_64
         git push origin next_linux_x86_64
     - name: Build
       run: |
