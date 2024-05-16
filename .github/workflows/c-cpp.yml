@@ -22,7 +22,7 @@ jobs:
     - name: Test
       run: echo "testing"
     - name: Package
-      run: touch test.tar
+      run: cp testfile.txt test.txt
     - name: Release
       uses: softprops/action-gh-release@v2.0.5
       with:
@@ -46,7 +46,7 @@ jobs:
     - name: Test
       run: echo "testing"
     - name: Package
-      run: touch test.tar
+      run: cp testfile.txt test.txt
     - name: Release
       uses: softprops/action-gh-release@v2.0.5
       with:
@@ -54,4 +54,4 @@ jobs:
         tag_name: next_linux_x86_64
         prerelease: true
         files: |
-          test.tar
+          test.txt
