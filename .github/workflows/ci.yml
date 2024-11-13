@@ -51,8 +51,12 @@ jobs:
           ./colgm main.colgm --lex --ast
           ./colgm lexer.colgm --lex --ast
 
-  windows-build-bootstrap:
+  windows-x86_64-build-bootstrap:
     runs-on: windows-latest
     steps:
     - name: checkout
       uses: actions/checkout@v4
+    - name: fetch llvm-dev
+      run: choco install -y llvm --version=18.1.6
+    - name: verify
+      run: clang --version
