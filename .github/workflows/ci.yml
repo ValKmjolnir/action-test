@@ -60,3 +60,9 @@ jobs:
       run: choco install -y llvm
     - name: verify
       run: clang --version
+    - name: colgm-build
+      run: |
+          cd test
+          clang out.ll -o colgm
+          ./colgm main.colgm --lex --ast
+          ./colgm lexer.colgm --lex --ast
