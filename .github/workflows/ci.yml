@@ -57,6 +57,6 @@ jobs:
     - name: checkout
       uses: actions/checkout@v4
     - name: fetch llvm-dev
-      run: choco install -y llvm --version=18.1.6
+      run: choco install -y llvm
     - name: verify
       run: clang --version
