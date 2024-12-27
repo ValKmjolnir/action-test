@@ -81,7 +81,7 @@ jobs:
           ./colgm
     - name: hello-build
       run: |
-          mkdir cmake-build-windws-msvc
+          mkdir cmake-build-windows-msvc
           cd cmake-build-windows-msvc
           cmake ../src -DCMAKE_BUILD_TYPE=Release
           MSBuild.exe hello.sln /p:Configuration=Release /p:Platform=x64
