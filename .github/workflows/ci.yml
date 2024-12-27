@@ -1,4 +1,4 @@
-name: Bootstrap
+name: Build
 
 on:
   push:
@@ -86,3 +86,28 @@ jobs:
           cmake ../src -DCMAKE_BUILD_TYPE=Release
           MSBuild.exe hello.sln /p:Configuration=Release /p:Platform=x64
           .\Release\hello.exe
+
+  windows-x86_64-build-mingw:
+    runs-on: windows-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@v4
+    - name: fetch llvm-dev
+      run: |
+          choco install -y llvm
+          choco install -y cmake
+          choco install -y mingw
+    - name: verify
+      run: clang --version
+    - name: colgm-build
+      run: |
+          cd test
+          clang out.ll -o colgm
+          ./colgm
+    - name: hello-build
+      run: |
+          mkdir cmake-build-windows-mingw
+          cd cmake-build-windows-mingw
+          -DCMAKE_BUILD_TYPE=Release -G "MinGW Makefiles" -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++
+          mingw32-make.exe -j6
+          .\hello.exe
