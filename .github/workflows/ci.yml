@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  mac-aarch64-build-bootstrap:
+  mac-aarch64-build:
     runs-on: macos-latest
     steps:
     - name: checkout
@@ -26,10 +26,16 @@ jobs:
           cd test
           ls /opt/homebrew/opt/llvm@17/bin
           /opt/homebrew/opt/llvm@17/bin/clang out.ll -o colgm
-          ./colgm main.colgm --lex --ast
-          ./colgm lexer.colgm --lex --ast
+          ./colgm
+    - name: hello-build
+      run: |
+          mkdir cmake-build-mac
+          cd cmake-build-mac
+          cmake ../src -DCMAKE_BUILD_TYPE=Release
+          make -j
+          ./hello
     
-  linux-x86_64-build-bootstrap:
+  linux-x86_64-build:
     runs-on: ubuntu-latest
     steps:
     - name: checkout
@@ -48,21 +54,35 @@ jobs:
           ls /usr/lib/llvm-14/bin
           /usr/lib/llvm-14/bin/clang out.ll -o colgm
           /usr/bin/clang-14 out.ll -o colgm
-          ./colgm main.colgm --lex --ast
-          ./colgm lexer.colgm --lex --ast
+          ./colgm
+    - name: hello-build
+      run: |
+          mkdir cmake-build-linux
+          cd cmake-build-linux
+          cmake ../src -DCMAKE_BUILD_TYPE=Release
+          make -j
+          ./hello
 
-  windows-x86_64-build-bootstrap:
+  windows-x86_64-build-msvc:
     runs-on: windows-latest
     steps:
     - name: checkout
       uses: actions/checkout@v4
     - name: fetch llvm-dev
-      run: choco install -y llvm
+      run: |
+          choco install -y llvm
+          choco install -y cmake
     - name: verify
       run: clang --version
     - name: colgm-build
       run: |
           cd test
           clang out.ll -o colgm
-          ./colgm main.colgm --lex --ast
-          ./colgm lexer.colgm --lex --ast
+          ./colgm
+    - name: hello-build
+      run: |
+          mkdir cmake-build-windws-msvc
+          cd cmake-build-windows-msvc
+          cmake ../src -DCMAKE_BUILD_TYPE=Release
+          MSBuild.exe hello.sln /p:Configuration=Release /p:Platform=x64
+          .\Release\hello.exe
