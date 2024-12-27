@@ -79,6 +79,8 @@ jobs:
           cd test
           clang out.ll -o colgm
           ./colgm
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v2
     - name: hello-build
       run: |
           mkdir cmake-build-windows-msvc
@@ -108,6 +110,6 @@ jobs:
       run: |
           mkdir cmake-build-windows-mingw
           cd cmake-build-windows-mingw
-          -DCMAKE_BUILD_TYPE=Release -G "MinGW Makefiles" -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++
+          cmake -DCMAKE_BUILD_TYPE=Release -G "MinGW Makefiles" -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++
           mingw32-make.exe -j6
           .\hello.exe
