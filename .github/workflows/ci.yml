@@ -110,6 +110,6 @@ jobs:
       run: |
           mkdir cmake-build-windows-mingw
           cd cmake-build-windows-mingw
-          cmake -DCMAKE_BUILD_TYPE=Release -G "MinGW Makefiles" -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++
+          cmake ../src -DCMAKE_BUILD_TYPE=Release -G "MinGW Makefiles" -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++
           mingw32-make.exe -j6
           .\hello.exe
