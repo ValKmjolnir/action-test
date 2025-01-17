@@ -59,3 +59,29 @@ jobs:
         draft: false
         files: |
           test.txt
+
+  linux-aarch64-build:
+    runs-on: ubuntu-24.04-arm
+    steps:
+    - uses: actions/checkout@v4
+    - name: Tag
+      run: |
+        git fetch --tags origin
+        git tag -f next_linux_aarch64
+        git push -f origin next_linux_aarch64
+    - name: Build
+      run: |
+        echo "building"
+    - name: Test
+      run: echo "testing"
+    - name: Package
+      run: cp testfile.txt test.txt
+    - name: Release
+      uses: softprops/action-gh-release@v2.0.5
+      with:
+        name: linux nightly build
+        tag_name: next_linux_aarch64
+        prerelease: true
+        draft: false
+        files: |
+          test.txt
